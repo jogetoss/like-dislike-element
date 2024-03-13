@@ -1,0 +1,47 @@
+[
+    {
+        "title": "@@org.joget.likedislike.element.configElement@@",
+        "properties": [
+            {
+                "name": "id",
+                "label": "@@org.joget.likedislike.element.id@@",
+                "type": "textfield",
+                "required": "True",
+                "regex_validation": "^[a-zA-Z0-9_]+$",
+                "validation_message": "@@org.joget.likedislike.element.invalidId@@"
+            },
+            {
+                "name": "label",
+                "label": "@@org.joget.likedislike.element.label@@",
+                "type": "textfield",
+                "required": "True",
+                "value": "Like Dislike"
+            },
+            {
+                "name": "formDefId",
+                "label": "Form to store Like Dislike",
+                "type": "selectbox",
+                "required": "True",
+                "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/forms/options"
+            },
+            {
+                "name": "likeDislikeField",
+                "label": "Like Dislike Field",
+                "type": "selectbox",
+                "options_ajax_on_change": "formDefId",
+                "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options",
+                "required": "True"
+            },
+            {
+                "name": "foreignKeyField",
+                "label": "Foreign Key Field",
+                "type": "selectbox",
+                "options_ajax_on_change": "formDefId",
+                "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options",
+                "required": "True"
+            }
+
+
+        ]
+    }
+]
