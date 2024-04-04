@@ -1,32 +1,32 @@
 [
     {
-        "title": "@@org.joget.likedislike.element.configElement@@",
+        "title": "@@org.joget.marketplace.likedislike.element.configElement@@",
         "properties": [
             {
                 "name": "id",
-                "label": "@@org.joget.likedislike.element.id@@",
+                "label": "@@org.joget.marketplace.likedislike.element.id@@",
                 "type": "textfield",
                 "required": "True",
                 "regex_validation": "^[a-zA-Z0-9_]+$",
-                "validation_message": "@@org.joget.likedislike.element.invalidId@@"
+                "validation_message": "@@org.joget.marketplace.likedislike.element.invalidId@@"
             },
             {
                 "name": "label",
-                "label": "@@org.joget.likedislike.element.label@@",
+                "label": "@@org.joget.marketplace.likedislike.element.label@@",
                 "type": "textfield",
                 "required": "True",
                 "value": "Like Dislike"
             },
             {
                 "name": "formDefId",
-                "label": "Form to store Like Dislike",
+                "label": "@@org.joget.marketplace.likedislike.element.formDefId@@",
                 "type": "selectbox",
                 "required": "True",
                 "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/forms/options"
             },
             {
                 "name": "likeDislikeField",
-                "label": "Like Dislike Field",
+                "label": "@@org.joget.marketplace.likedislike.element.likeDislikeField@@",
                 "type": "selectbox",
                 "options_ajax_on_change": "formDefId",
                 "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options",
@@ -34,14 +34,24 @@
             },
             {
                 "name": "foreignKeyField",
-                "label": "Foreign Key Field",
+                "label": "@@org.joget.marketplace.likedislike.element.foreignKeyField@@",
                 "type": "selectbox",
                 "options_ajax_on_change": "formDefId",
                 "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options",
                 "required": "True"
+            },
+            {
+                "name": "hideElement",
+                "label": "@@org.joget.marketplace.likedislike.element.hideElement@@",
+                "type": "checkbox",
+                "value" : "false",
+                "options": [
+                    {
+                        "value": "true",
+                        "label": ""
+                    }
+                ]
             }
-
-
         ]
     }
 ]

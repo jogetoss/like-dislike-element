@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.joget.apps.app.model.AppDefinition;
+import org.joget.apps.app.service.AppPluginUtil;
 import org.joget.apps.app.service.AppService;
 import org.joget.apps.app.service.AppUtil;
 import org.joget.apps.form.dao.FormDataDao;
@@ -58,11 +59,6 @@ public class LikeDislike extends Element implements FormBuilderPaletteElement, P
             dataModel.put("dislikes", dislikeCount);
         }
         
-        if(id == null || id.isEmpty()) {
-            dataModel.put("mode", "new");
-        } else {
-            dataModel.put("mode", "edit");
-        }
         dataModel.put("id", id);
         String html = FormUtil.generateElementHtml(this, formData, template, dataModel);
         return html;
@@ -97,7 +93,7 @@ public class LikeDislike extends Element implements FormBuilderPaletteElement, P
 
     @Override
     public String getName() {
-        return "Like Dislike";
+        return AppPluginUtil.getMessage("org.joget.marketplace.likedislike.element.pluginLabel", getClassName(), MESSAGE_PATH);
     }
 
     @Override
@@ -107,12 +103,12 @@ public class LikeDislike extends Element implements FormBuilderPaletteElement, P
 
     @Override
     public String getDescription() {
-        return "To like or dislike form content";
+        return AppPluginUtil.getMessage("org.joget.marketplace.likedislike.element.pluginDesc", getClassName(), MESSAGE_PATH);
     }
 
     @Override
     public String getLabel() {
-        return "Like Dislike";
+        return AppPluginUtil.getMessage("org.joget.marketplace.likedislike.element.pluginLabel", getClassName(), MESSAGE_PATH);
     }
 
     @Override
