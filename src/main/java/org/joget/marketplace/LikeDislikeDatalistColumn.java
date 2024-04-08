@@ -117,8 +117,8 @@ public class LikeDislikeDatalistColumn extends DataListDisplayColumnDefault impl
         String config = jsonObject.toString();
         config = StringUtil.escapeString(SecurityUtil.encrypt(config), StringUtil.TYPE_URL, null);
       
-        String html = "<a class=\"far fa-lg fa-thumbs-up\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=like-btn" + "\">" + likeCount + "</a>";
-        html += "&nbsp;&nbsp;<a class=\"far fa-lg fa-thumbs-down\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=dislike-btn"  + "\">" + dislikeCount + "</a>";
+        String html = "<a class=\"far fa-lg fa-thumbs-up\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=like-btn" + "\"> " + likeCount + "</a>";
+        html += "&nbsp;&nbsp;<a class=\"far fa-lg fa-thumbs-down\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=dislike-btn"  + "\"> " + dislikeCount + "</a>";
         return html;
     }
 
