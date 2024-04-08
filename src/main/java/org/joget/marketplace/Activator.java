@@ -8,7 +8,7 @@ import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
     
-    public static final String VERSION = "8.0.1";
+    public static final String VERSION = "8.0.2";
 
     protected Collection<ServiceRegistration> registrationList;
     
@@ -17,6 +17,7 @@ public class Activator implements BundleActivator {
 
         //Register plugin here
         registrationList.add(context.registerService(LikeDislike.class.getName(), new LikeDislike(), null));
+        registrationList.add(context.registerService(LikeDislikeDatalistColumn.class.getName(), new LikeDislikeDatalistColumn(), null));
     }
 
     public void stop(BundleContext context) {

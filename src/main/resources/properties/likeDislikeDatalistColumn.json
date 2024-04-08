@@ -1,0 +1,46 @@
+[
+    {
+        "title": "@@org.joget.marketplace.likedislike.datalist.configElement@@",
+        "properties": [
+            {
+                "name": "formDefId",
+                "label": "@@org.joget.marketplace.likedislike.datalist.formDefId@@",
+                "type": "selectbox",
+                "required": "True",
+                "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/forms/options"
+            },
+            {
+                "name": "likeDislikeField",
+                "label": "@@org.joget.marketplace.likedislike.datalist.likeDislikeField@@",
+                "type": "selectbox",
+                "options_ajax_on_change": "formDefId",
+                "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options",
+                "required": "True"
+            },
+            {
+                "name": "foreignKeyField",
+                "label": "@@org.joget.marketplace.likedislike.datalist.foreignKeyField@@",
+                "type": "selectbox",
+                "options_ajax_on_change": "formDefId",
+                "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options",
+                "required": "True"
+            },
+            {
+                "name":"redirectDetails",
+                "label": "@@org.joget.marketplace.likedislike.datalist.redirectDetails@@",
+                "type":"Header"
+             },
+             {
+                "name":"redirectUserviewMenu",
+                "label":"@@org.joget.marketplace.likedislike.datalist.redirectUserviewMenu@@",
+                "type":"selectbox",
+                "options_ajax":"[CONTEXT_PATH]/web/json/console/app[APP_PATH]/userview/options"
+             },
+             {
+                "name":"redirectUserviewMenuListID",
+                "label":"@@org.joget.marketplace.likedislike.datalist.redirectUserviewMenuListID@@",
+                "type":"textfield"
+             }
+        ]
+    }
+]
