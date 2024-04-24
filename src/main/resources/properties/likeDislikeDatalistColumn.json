@@ -40,7 +40,23 @@
                 "name":"redirectUserviewMenuListID",
                 "label":"@@org.joget.marketplace.likedislike.datalist.redirectUserviewMenuListID@@",
                 "type":"textfield"
-             }
+             },
+             {
+                "name":"visibility",
+                "label": "@@org.joget.marketplace.likedislike.datalist.visibility@@",
+                "type":"Header"
+             },
+             {
+                "name":"columnName",
+                "label":"@@org.joget.marketplace.likedislike.datalist.columnName@@",
+                "type":"autocomplete",
+                "options_callback":"DatalistBuilder.getColumnOptions"
+             },
+             {
+                "name":"columnValue",
+                "label":"@@org.joget.marketplace.likedislike.datalist.columnValue@@",
+                "type":"textfield"
+             }                
         ]
     }
 ]

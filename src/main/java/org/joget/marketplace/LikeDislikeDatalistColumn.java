@@ -3,6 +3,8 @@ package org.joget.marketplace;
 import org.apache.commons.lang.StringUtils;
 import org.joget.apps.datalist.model.DataListDisplayColumnDefault;
 import org.joget.apps.datalist.model.DataListQueryParam;
+import org.joget.apps.datalist.service.DataListService;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -102,6 +104,8 @@ public class LikeDislikeDatalistColumn extends DataListDisplayColumnDefault impl
         String likeDislikeField = getPropertyString("likeDislikeField");
         long likeCount = getLikeDislikeCount(formDefId, fkField, fkValue, likeDislikeField, "like");
         long dislikeCount = getLikeDislikeCount(formDefId, fkField, fkValue, likeDislikeField, "dislike");
+        String columnName = getPropertyString("columnName");
+        String columnValue = getPropertyString("columnValue");
 
         //create nonce
         String paramName = "form-contents";
@@ -117,8 +121,19 @@ public class LikeDislikeDatalistColumn extends DataListDisplayColumnDefault impl
         String config = jsonObject.toString();
         config = StringUtil.escapeString(SecurityUtil.encrypt(config), StringUtil.TYPE_URL, null);
       
-        String html = "<a class=\"far fa-lg fa-thumbs-up\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=like-btn" + "\"> " + likeCount + "</a>";
-        html += "&nbsp;&nbsp;<a class=\"far fa-lg fa-thumbs-down\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=dislike-btn"  + "\"> " + dislikeCount + "</a>";
+
+        // trigger visibility, if datalist value is found only show column value
+        DataListService dataListService = (DataListService) AppUtil.getApplicationContext().getBean("dataListService");
+        String actualColumnValue = "";
+        if(columnName != null && !columnName.isEmpty() && columnName != ""){
+            actualColumnValue = dataListService.evaluateColumnValueFromRow(row, columnName).toString();
+        }
+
+        String html = "";
+        if(actualColumnValue.equals(columnValue)){
+            html = "<a class=\"far fa-lg fa-thumbs-up\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=like-btn" + "\"> " + likeCount + "</a>";
+            html += "&nbsp;&nbsp;<a class=\"far fa-lg fa-thumbs-down\" href=\"" + getServerUrlPlugin(nonce, paramName) + "&config=" + config + "&id=" + rowHash.get("id").toString() + "&buttonId=dislike-btn"  + "\"> " + dislikeCount + "</a>";    
+        }
         return html;
     }
 
