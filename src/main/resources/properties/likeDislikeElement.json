@@ -39,18 +39,6 @@
                 "options_ajax_on_change": "formDefId",
                 "options_ajax": "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options",
                 "required": "True"
-            },
-            {
-                "name": "hideElement",
-                "label": "@@org.joget.marketplace.likedislike.element.hideElement@@",
-                "type": "checkbox",
-                "value" : "false",
-                "options": [
-                    {
-                        "value": "true",
-                        "label": ""
-                    }
-                ]
             }
         ]
     }
