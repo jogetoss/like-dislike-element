@@ -1,6 +1,6 @@
 # Description
 
-This element allows multiple user to like or dislike form content during and after form submission. It saves the like or dislike record to another form while referencing the current form.
+The Like/Dislike Element plugin allows multiple user to like or dislike form content. It saves the like or dislike record to another form while referencing the current form. It also allows like or dislike in datalist using the datalist column.
 
 # Getting Help
 
