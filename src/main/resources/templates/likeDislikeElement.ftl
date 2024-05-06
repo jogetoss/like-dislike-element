@@ -1,4 +1,4 @@
-<#if !(request.getAttribute("org.joget.marketplace.likeDislikeElement")??) >
+<#if !(request.getAttribute("org.joget.marketplace.likeDislikeElement_EDITABLE")??) >
     <script src="${request.contextPath}/plugin/org.joget.marketplace.LikeDislike/js/like-dislike.js"></script>
 
 <#if !includeMetaData>
@@ -37,6 +37,12 @@
 
     <#if id?has_content>
     <script>
+        $(document).on('click', '#like-btn, #dislike-btn', function(event) {
+            if ($(this).hasClass('disabled')) {
+                event.preventDefault();
+            }
+        });
+
         $("#${elementParamName!}").likeDislike({
             reverseMode: false,
             <#if anonymous == "true">
@@ -58,11 +64,11 @@
                         config : '${element.configString!}'
                     },
                     success: function (data) {
-                      likes.text(data.likes);
-                      dislikes.text(data.dislikes);
-                      localStorage['key'] = btnType;
+                        likes.text(data.likes);
+                        dislikes.text(data.dislikes);
+                        localStorage['key'] = btnType;
                     }
-                  });
+                });
             }
         });
     </script>
