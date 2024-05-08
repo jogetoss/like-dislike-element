@@ -28,18 +28,21 @@
             {
                 "name":"redirectDetails",
                 "label": "@@org.joget.marketplace.likedislike.datalist.redirectDetails@@",
-                "type":"Header"
+                "type":"Header",
+                "description":"@@org.joget.marketplace.likedislike.datalist.redirectDetails.desc@@"
              },
              {
                 "name":"redirectUserviewMenu",
                 "label":"@@org.joget.marketplace.likedislike.datalist.redirectUserviewMenu@@",
                 "type":"selectbox",
-                "options_ajax":"[CONTEXT_PATH]/web/json/console/app[APP_PATH]/userview/options"
+                "options_ajax":"[CONTEXT_PATH]/web/json/console/app[APP_PATH]/userview/options",
+                "required": "True"
              },
              {
                 "name":"redirectUserviewMenuListID",
                 "label":"@@org.joget.marketplace.likedislike.datalist.redirectUserviewMenuListID@@",
-                "type":"textfield"
+                "type":"textfield",
+                "required": "True"
              },
              {
                 "name":"visibility",
