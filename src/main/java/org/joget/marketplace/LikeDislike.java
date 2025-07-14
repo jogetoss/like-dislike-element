@@ -60,6 +60,11 @@ public class LikeDislike extends Element implements FormBuilderPaletteElement, P
         }
         
         dataModel.put("id", id);
+        
+        // current user like dislike active value
+        String likedislike = getUserLikeDislike(formDefId, foreignKeyField, id, likeDislikeField);
+        dataModel.put("active", likedislike);
+
         String html = FormUtil.generateElementHtml(this, formData, template, dataModel);
         return html;
     }
@@ -165,15 +170,23 @@ public class LikeDislike extends Element implements FormBuilderPaletteElement, P
                     FormDataDao formDataDao = (FormDataDao) AppUtil.getApplicationContext().getBean("formDataDao");
                     String tableName = appService.getFormTableName(appDef, formDefId);
                     String username = WorkflowUtil.getCurrentUsername();
-                    // check if the this user has record in table
-                    FormRowSet ldRows = formDataDao.find(formDefId, tableName, condition, new String[]{fkValue, username}, FormUtil.PROPERTY_DATE_MODIFIED, true, 0, 1);
-                    if (ldRows != null && !ldRows.isEmpty()) {
-                        FormRow ldRow = ldRows.get(0);
-                        String rId = ldRow.getId();
-                        handleLikeDislike(buttonId, fkValue, formDefId, tableName, fkField, likeDislikeField, rId, appService);
+
+                    if (Integer.parseInt(clickedValue) == 0){
+                        FormRowSet ldRows = formDataDao.find(formDefId, tableName, condition, new String[]{fkValue, username}, FormUtil.PROPERTY_DATE_MODIFIED, true, 0, 1);
+                        if (ldRows != null && !ldRows.isEmpty()) {
+                            formDataDao.delete(formDefId, tableName, ldRows);
+                        }
                     } else {
-                        // no record found, insert new row
-                        handleLikeDislike(buttonId, fkValue, formDefId, tableName, fkField, likeDislikeField, null, appService);
+                        // check if the this user has record in table
+                        FormRowSet ldRows = formDataDao.find(formDefId, tableName, condition, new String[]{fkValue, username}, FormUtil.PROPERTY_DATE_MODIFIED, true, 0, 1);
+                        if (ldRows != null && !ldRows.isEmpty()) {
+                            FormRow ldRow = ldRows.get(0);
+                            String rId = ldRow.getId();
+                            handleLikeDislike(buttonId, fkValue, formDefId, tableName, fkField, likeDislikeField, rId, appService);
+                        } else {
+                            // no record found, insert new row
+                            handleLikeDislike(buttonId, fkValue, formDefId, tableName, fkField, likeDislikeField, null, appService);
+                        }
                     }
                 }
             }
@@ -205,6 +218,21 @@ public class LikeDislike extends Element implements FormBuilderPaletteElement, P
         row.put(fieldId, buttonId.equals("like-btn") ? "like" : "dislike");
         rows.add(row);
         appService.storeFormData(formDefId, tableName, rows, rId);
+    }
+
+    protected String getUserLikeDislike(String formDefId, String foreignKeyField, String foreignKeyValue, String fieldId) {
+        AppService appService = (AppService) FormUtil.getApplicationContext().getBean("appService");
+        FormDataDao formDataDao = (FormDataDao) AppUtil.getApplicationContext().getBean("formDataDao");
+        AppDefinition appDef = AppUtil.getCurrentAppDefinition();
+        String tableName = appService.getFormTableName(appDef, formDefId);
+        String likedislike = "";
+        String username = WorkflowUtil.getCurrentUsername();
+        String condition = "where e.customProperties." + foreignKeyField + " = ? AND e.createdBy = ?";
+        FormRowSet rows = formDataDao.find(formDefId, tableName, condition, new String[]{foreignKeyValue, username}, FormUtil.PROPERTY_DATE_MODIFIED, true, 0, null);
+        if (rows != null && !rows.isEmpty()) {
+            likedislike = rows.get(0).get(fieldId).toString();
+        }
+        return likedislike;
     }
 
 }
